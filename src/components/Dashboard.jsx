@@ -408,6 +408,11 @@ const Dashboard = () => {
           />
         </section>
 
+        {/* FOOTER */}
+        <footer className="py-8 text-center border-t border-slate-200/50 dark:border-slate-850/50 text-xs sm:text-sm text-slate-400 dark:text-slate-500 font-medium tracking-wide">
+          <p>© {new Date().getFullYear()} Jus Jumpin Analytics • Developed by <span className="text-brand-600 dark:text-brand-400 font-bold hover:underline cursor-pointer">Rahul Shaw</span></p>
+        </footer>
+
       </div>
     </div>
   );
