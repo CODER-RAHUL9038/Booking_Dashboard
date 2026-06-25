@@ -90,14 +90,27 @@ const generateMockData = () => {
     return null;
   };
 
-  // Date distribution between 15-05-2026 and 20-05-2026
-  const dates = ['2026-05-15', '2026-05-16', '2026-05-17', '2026-05-18', '2026-05-19', '2026-05-20'];
+  // Date distribution between 15-05-2026 and 20-05-2026 with realistic business weighting (weekend spikes)
+  const dateWeights = [
+    { date: '2026-05-15', weight: 15 }, // Friday
+    { date: '2026-05-16', weight: 26 }, // Saturday (Weekend peak!)
+    { date: '2026-05-17', weight: 29 }, // Sunday (Weekend peak!)
+    { date: '2026-05-18', weight: 9 },  // Monday (Weekday drop)
+    { date: '2026-05-19', weight: 10 }, // Tuesday
+    { date: '2026-05-20', weight: 11 }  // Wednesday
+  ];
+  const datePool = [];
+  dateWeights.forEach(dw => {
+    for (let j = 0; j < dw.weight; j++) {
+      datePool.push(dw.date);
+    }
+  });
 
   for (let i = 0; i < totalBookings; i++) {
     const store = storePool[i % storePool.length] || 'ABC';
     const payment = getPaymentMode(i);
     const activityObj = activities[i % activities.length];
-    const date = dates[i % dates.length];
+    const date = datePool[i % datePool.length];
     
     // Pick name
     const fName = firstNames[(i * 3) % firstNames.length];
